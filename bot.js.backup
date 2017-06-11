@@ -1,0 +1,55 @@
+var Discordie = require('discordie');
+
+const Events = Discordie.Events;
+var client = new Discordie();
+var userMatt;
+var server;
+var channel;
+client.connect({
+	token: "MzIyNTMzOTYwMjQyNDI5OTUy.DBuajg.h8hEEKEQSXDaijm9WtLDppaYSEw"
+});
+
+client.Dispatcher.on(Events.GATEWAY_READY, e => {
+	console.log('Connected as: ' + client.User.username);
+	//console.log(client.Guilds.get("160639168702185472"));
+	//console.log(client.Guilds.find(g => g.name == "sandbox"));
+	//console.log(client.Guilds.get("160639168702185472").textChannels.get("160639168702185472"));
+	server = client.Guilds.find(g => g.name == "sandbox")
+	if (server == null) return console.log("invalid guild");
+
+	channel = server.textChannels.find(c => c.name == "general");
+
+	userMatt = client.Users.find(u => u.username == "Dierkshizzle");
+	if(!userMatt) return console.log("invalid user");
+    //channel.sendMessage("test with tts", true);
+	//channel.sendMessage("test");
+	//channel.sendMessage(userMatt.mention);
+});
+
+// var date = new Date();
+// var curDate = null;
+
+// do { curDate = new Date(); } 
+// while(curDate-date < 5000);
+
+
+client.Dispatcher.on(Events.MESSAGE_CREATE, e => {
+	if (e.message.content == 'PING') {
+		e.message.channel.sendMessage('PONG');
+	}
+	if (e.message.content == 'matt is a nub') {
+		e.message.channel.sendMessage('i concur', true);
+	}
+	if (e.message.content == 'g?') {
+		e.message.channel.sendMessage(userMatt.mention);
+		channel.sendMessage(channel.mention);
+	}
+	if (e.message.content == 'i like league of legends') {
+		channel.sendMessage('(╯°□°）╯︵ ┻━┻');
+	}
+	if (e.message.content == '/alldead') {
+		server.voiceChannels[0].join();
+		//channel.sendMessage('THEY\'RE ALL DEAD!!', true);
+	}
+
+});

@@ -1,0 +1,15 @@
+{
+  "name": "discord-bot-1",
+  "version": "1.0.0",
+  "description": "testbot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "node bot.js"
+  },
+  "author": "Raymond",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "discordie": "^0.11.0"
+  }
+}
